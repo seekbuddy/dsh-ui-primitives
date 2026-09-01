@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>文档 · dsh-ui-kit</title>
+    <meta name="description" content="dsh-ui-kit 官方文档：安装、快速开始、组件清单、设计 Token 体系、主题与插件作者指南。" />
+    <link rel="stylesheet" href="../assets/site.css" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('dsh-ui-kit-theme');
+          var theme = saved === 'light' || saved === 'dark'
+            ? saved
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (err) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../">
+          <span class="brand-mark">✦</span>
+          <span>dsh-ui-kit</span>
+        </a>
+        <nav class="nav">
+          <a href="../">落地页</a>
+          <a class="active" href="./">文档</a>
+          <a href="{{repoUrl}}" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="{{npmUrl}}" target="_blank" rel="noreferrer">npm</a>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle" type="button">深色</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="container docs-layout">
+        <aside class="docs-sidebar" aria-label="文档目录">
+          {{tocHtml}}
+        </aside>
+        <article class="markdown-body">
+          {{readmeHtml}}
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>© {{package}} v{{version}} · MIT License</div>
+        <div class="footer-links">
+          <a href="../">落地页</a>
+          <a href="{{repoUrl}}" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="{{npmUrl}}" target="_blank" rel="noreferrer">npm</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../assets/site.js"></script>
+  </body>
+</html>

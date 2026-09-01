@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>dsh-ui-kit · DeepSeek Harness 风格 React 组件库</title>
+    <meta name="description" content="dsh-ui-kit 是忠实复刻 DeepSeek Harness Web UI 设计系统的独立 React 组件库，tokens、明暗主题、组件样式与官方严格一致。" />
+    <link rel="stylesheet" href="./assets/site.css" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('dsh-ui-kit-theme');
+          var theme = saved === 'light' || saved === 'dark'
+            ? saved
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (err) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="./">
+          <span class="brand-mark">✦</span>
+          <span>dsh-ui-kit</span>
+        </a>
+        <nav class="nav">
+          <a class="active" href="./">落地页</a>
+          <a href="./docs/">文档</a>
+          <a href="{{repoUrl}}" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="{{npmUrl}}" target="_blank" rel="noreferrer">npm</a>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle" type="button">深色</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <p class="eyebrow">React 18 / 19 · MIT · 零 Cordis 依赖 · v{{version}}</p>
+          <h1>为 DeepSeek Harness 插件打造的 <span class="grad">UI 组件库</span></h1>
+          <p class="lede">
+            dsh-ui-kit 忠实复刻 DeepSeek Harness Web UI 的设计系统与 UI 原子组件。
+            <code style="font-family: var(--mono)">--dsw-*</code> tokens、明暗主题、组件样式与官方
+            <code style="font-family: var(--mono)">@deepseek-ai/dsh-client-ui-primitives</code> /
+            <code style="font-family: var(--mono)">dsh-client-ui-theme</code> 严格一致，让第三方插件与宿主界面无缝融合。
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="./docs/">快速开始</a>
+            <a class="btn ghost" href="{{repoUrl}}" target="_blank" rel="noreferrer">在 GitHub 上查看</a>
+          </div>
+          <div class="install">
+            <code id="install-command">npm i dsh-ui-kit</code>
+            <button class="copy-btn" type="button">复制</button>
+          </div>
+          <div class="badges">
+            <span class="badge"><strong>v{{version}}</strong></span>
+            <span class="badge">MIT License</span>
+            <span class="badge">65+ 图标</span>
+            <span class="badge">React 18 / 19</span>
+            <span class="badge">零 Cordis</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section-head">为什么选择 dsh-ui-kit？</h2>
+          <div class="grid">
+            <div class="card">
+              <div class="card-icon">🎨</div>
+              <h3>完整设计 Token</h3>
+              <p>覆盖 <code>--dsw-static-*</code> 色板、语义别名、产品专属 token、阴影、字体与 Shiki 高亮调色板，明暗两套自动成立。</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">🌗</div>
+              <h3>明暗主题同源</h3>
+              <p>通过 <code>body[data-ds-dark-theme]</code> 属性切换，与 DeepSeek Harness 宿主完全同机制，插件无需二次适配。</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">🧩</div>
+              <h3>零 Cordis 依赖</h3>
+              <p>纯 props 原子组件，可在任何 React 18 / 19 应用中使用，没有运行时框架绑定。</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">📦</div>
+              <h3>自包含样式</h3>
+              <p>组件样式在构建时编译为 hash 类名并在运行时自动注入，无需任何 CSS Modules 配置。</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">🔤</div>
+              <h3>数学与代码</h3>
+              <p>KaTeX 字体内联（woff2 data-URI），Shiki 语法高亮，MarkdownText 支持 GFM、流式增量解析。</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">📐</div>
+              <h3>类型完整</h3>
+              <p>全套 TypeScript 声明，构建产物包含可发布 ESM bundle 与精确类型。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <div class="container">
+          <h2 class="section-head">快速开始</h2>
+          <p class="section-sub">安装后引入一次 tokens.css，组件样式会随组件自动注入。</p>
+          <pre class="code-block"><code class="language-tsx">import { Button, Pill, Input, StateDot, MarkdownText, setThemePreference } from 'dsh-ui-kit'
+import 'dsh-ui-kit/tokens.css'
+
+export function MyPluginUI() {
+  return (
+    &lt;div style={{ fontFamily: 'var(--dsw-font-family)' }}&gt;
+      &lt;Button variant="primary" onClick={() =&gt; setThemePreference('dark')}&gt;切换深色&lt;/Button&gt;
+      &lt;Pill active&gt;激活&lt;/Pill&gt;
+      &lt;Input placeholder="搜索" /&gt;
+      &lt;StateDot state="done" /&gt;
+      &lt;MarkdownText text={'# 你好\n\n这是 **Markdown**'} /&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+          <p>
+            peer 依赖：<code>react ^18.2.0 || ^19.0.0</code>、<code>react-dom ^18.2.0 || ^19.0.0</code>。
+            完整组件清单、Token 体系与发布说明见 <a href="./docs/">官方文档</a>。
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section-head">给 DSH 第三方插件作者</h2>
+          <div class="grid">
+            <div class="card">
+              <div class="card-icon">🔌</div>
+              <h3>直接 import</h3>
+              <p>插件 client bundle 直接 <code>import { Button, ... } from 'dsh-ui-kit'</code>，样式自动注入，无需处理 CSS。</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">🎯</div>
+              <h3>与宿主同源</h3>
+              <p>token 变量名与官方一致，插件跑在 DSH 宿主内时界面与官方插件无缝融合。</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">⚡</div>
+              <h3>开箱即用</h3>
+              <p>KaTeX 字体已内联，Markdown、代码高亮、终端块等复杂组件无需额外 CSS 导入。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>© {{package}} v{{version}} · MIT License</div>
+        <div class="footer-links">
+          <a href="./docs/">文档</a>
+          <a href="{{repoUrl}}" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="{{npmUrl}}" target="_blank" rel="noreferrer">npm</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./assets/site.js"></script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>页面未找到 · dsh-ui-kit</title>
+    <link rel="stylesheet" href="./assets/site.css" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('dsh-ui-kit-theme');
+          var theme = saved === 'light' || saved === 'dark'
+            ? saved
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (err) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="./">
+          <span class="brand-mark">✦</span>
+          <span>dsh-ui-kit</span>
+        </a>
+        <nav class="nav">
+          <a href="./">落地页</a>
+          <a href="./docs/">文档</a>
+          <a href="{{repoUrl}}" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="{{npmUrl}}" target="_blank" rel="noreferrer">npm</a>
+        </nav>
+      </div>
+    </header>
+    <main class="error-page">
+      <div>
+        <h1>404</h1>
+        <p>页面不存在或已被移动。</p>
+        <p><a class="btn primary" href="./">返回落地页</a></p>
+      </div>
+    </main>
+    <script src="./assets/site.js"></script>
+  </body>
+</html>
