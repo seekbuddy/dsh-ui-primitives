@@ -8,6 +8,15 @@
     ],
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "dsh-ui-kit": ["src/index.ts"],
+      "dsh-ui-kit/blocks": ["src/blocks.ts"],
+      "dsh-ui-kit/markdown": ["src/markdown.ts"],
+      "dsh-ui-kit/icons": ["src/icons.ts"],
+      "dsh-ui-kit/theme": ["src/theme.ts"],
+      "dsh-ui-kit/theme/bootstrap": ["src/theme-bootstrap.ts"]
+    },
     "jsx": "react-jsx",
     "strict": true,
     "skipLibCheck": true,

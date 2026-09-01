@@ -1,6 +1,6 @@
 {
   "name": "dsh-ui-kit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Independent React component kit matching the DeepSeek Harness web UI design system (--dsw-* tokens, light/dark themes). Design source: @deepseek-ai/dsh-client-ui-primitives + dsh-client-ui-theme (MIT).",
   "keywords": [
     "dsh",
@@ -19,13 +19,33 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./blocks": {
+      "types": "./dist/types/blocks.d.ts",
+      "import": "./dist/blocks.js"
+    },
+    "./markdown": {
+      "types": "./dist/types/markdown.d.ts",
+      "import": "./dist/markdown.js"
+    },
+    "./icons": {
+      "types": "./dist/types/icons.d.ts",
+      "import": "./dist/icons.js"
+    },
+    "./theme": {
+      "types": "./dist/types/theme.d.ts",
+      "import": "./dist/theme.js"
+    },
+    "./theme/bootstrap": {
+      "types": "./dist/types/theme-bootstrap.d.ts",
+      "import": "./dist/theme-bootstrap.js"
+    },
     "./tokens.css": {
-      "types": "./dist/styles/tokens.css.d.ts",
-      "default": "./dist/styles/tokens.css"
+      "types": "./dist/tokens.css.d.ts",
+      "default": "./dist/tokens.css"
     },
     "./katex.css": {
-      "types": "./dist/katex/katex.min.css.d.ts",
-      "default": "./dist/katex/katex.min.css"
+      "types": "./dist/katex.css.d.ts",
+      "default": "./dist/katex.css"
     },
     "./package.json": "./package.json"
   },
@@ -33,7 +53,8 @@
     "dist",
     "LICENSE",
     "README.md",
-    "THIRD_PARTY_NOTICES.md"
+    "THIRD_PARTY_NOTICES.md",
+    "UPSTREAM.md"
   ],
   "sideEffects": [
     "**/*.css",
@@ -51,6 +72,12 @@
   "scripts": {
     "build": "node build/build.mjs",
     "typecheck": "tsc --noEmit",
+    "test": "npm run test:unit",
+    "test:unit": "node scripts/run-theme-tests.mjs",
+    "test:package": "node scripts/test-package.mjs",
+    "test:react18": "node scripts/test-fixture.mjs react18",
+    "test:next16": "node scripts/test-fixture.mjs next16",
+    "verify": "npm run typecheck && npm run test:unit && npm run build && npm run test:package && npm run test:react18 && npm run test:next16 && npm run demo:build && npm run build:site",
     "demo": "vite demo",
     "demo:build": "vite build demo",
     "build:site": "node scripts/build-site.mjs",

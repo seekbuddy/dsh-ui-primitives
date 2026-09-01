@@ -1,121 +1,138 @@
 # dsh-ui-kit
 
-> 🚀 [落地页](https://neil-ji.github.io/dsh-ui-kit/) · 📖 [官方文档](https://neil-ji.github.io/dsh-ui-kit/docs/) · [npm](https://www.npmjs.com/package/dsh-ui-kit) · [GitHub](https://github.com/neil-ji/dsh-ui-kit)
+> [落地页](https://neil-ji.github.io/dsh-ui-kit/) · [官方文档](https://neil-ji.github.io/dsh-ui-kit/docs/) · [npm](https://www.npmjs.com/package/dsh-ui-kit) · [GitHub](https://github.com/neil-ji/dsh-ui-kit)
 
-独立发布的 React 组件库，忠实复刻 DeepSeek Harness Web UI 的设计系统与 UI 原子组件：
-**tokens、明暗主题、组件样式与官方 `@deepseek-ai/dsh-client-ui-primitives` / `dsh-client-ui-theme` 严格一致**（MIT，零 cordis 依赖）。
-
-- 🎨 **设计系统**：完整 `--dsw-*` token 体系（静态色板 / 语义别名 / 产品专属 / 阴影 / 字体 / shiki 语法高亮）
-- 🌗 **明暗主题**：`body[data-ds-dark-theme]` 属性切换，与 DSH 宿主完全同机制
-- 🧩 **零 cordis**：纯 props 原子组件，可在任何 React 18/19 应用中使用
-- 📦 **自包含样式**：组件样式在构建时编译为 hash 类名并在运行时自动注入，无需任何 CSS Modules 配置
-- 🔤 **Math/代码**：KaTeX 字体内联（woff2 data-URI），Shiki 语法高亮
-- 📐 **类型完整**：全套 TypeScript 声明
+独立发布的 React 组件库，同步 DeepSeek Harness Web UI primitives 与五份 `--dsw-*` 主题样式，不依赖 Cordis。`0.2.0` 对齐官方 `dsh-v0.1.2-alpha.3`，支持 React 18 和 React 19。
 
 ## 安装
 
 ```sh
-npm i dsh-ui-kit
+npm install dsh-ui-kit
 ```
 
-peer 依赖：`react ^18.2.0 || ^19.0.0`、`react-dom ^18.2.0 || ^19.0.0`。
+peer dependencies：`react ^18.2.0 || ^19.0.0`、`react-dom ^18.2.0 || ^19.0.0`。
 
 ## 快速开始
 
-```tsx
-import { Button, Pill, Input, StateDot, MarkdownText, setThemePreference } from 'dsh-ui-kit'
-import 'dsh-ui-kit/tokens.css' // 一次性引入设计 token（含明暗两套）
+在应用的全局样式入口导入 tokens。使用数学公式时还必须显式导入 KaTeX 样式：
 
-function MyPluginUI() {
+```tsx
+import 'dsh-ui-kit/tokens.css'
+import 'dsh-ui-kit/katex.css'
+
+import { Button, Pill } from 'dsh-ui-kit'
+import { MarkdownText } from 'dsh-ui-kit/markdown'
+import { IconCheckOutline16 } from 'dsh-ui-kit/icons'
+import { setThemePreference } from 'dsh-ui-kit/theme'
+
+const labels = {
+  code: { copyLabel: '复制', copiedLabel: '已复制' },
+  footnotes: '脚注',
+}
+
+export function Example() {
   return (
-    <div style={{ fontFamily: 'var(--dsw-font-family)' }}>
-      <Button variant="primary" onClick={() => setThemePreference('dark')}>切换深色</Button>
-      <Pill active>激活</Pill>
-      <Input placeholder="搜索" />
-      <StateDot state="done" />
-      <MarkdownText text={'# 你好\\n\\n这是 **Markdown**：$\\\\frac{a}{b}$'} />
+    <div>
+      <Button variant="primary" onClick={() => setThemePreference('dark')}>
+        <IconCheckOutline16 /> 深色主题
+      </Button>
+      <Pill active>已启用</Pill>
+      <MarkdownText text={'公式：$x^2$'} labels={labels} />
     </div>
   )
 }
 ```
 
-要点：
+组件 CSS Modules 会随对应 JS 入口注入。`tokens.css` 和 `katex.css` 是全局 CSS，应由应用只导入一次。Markdown 不会隐式加载 KaTeX CSS。
 
-1. **token 只需引入一次**（`dsh-ui-kit/tokens.css`），组件样式随组件自动注入。
-2. **主题**：`setThemePreference('light' | 'dark' | 'system')` 与 React hooks
-   `useThemePreference()` / `useIsDark()`。暗色切换写 `body[data-ds-dark-theme]` 属性，
-   与 DeepSeek Harness 宿主一致——第三方插件跑在 DSH 里时 token 与宿主天然同源。
-3. 数学渲染（`MarkdownText` 含 KaTeX）字体已内联，开箱即用；不需要额外的 css 导入。
+## 公开入口
 
-## 组件清单
-
-| 分类 | 组件 |
+| 入口 | 内容 |
 | --- | --- |
-| 基础 | `Button`（primary/ghost/outline/toolbar, md/sm）· `Pill` · `Input` · `StateDot` · `DisclosureRow` |
-| 浮层 | `Menu` · `Modal` · `Tooltip` · `HoverCard` · `Toast` · `OnboardingSurface` · `RiskConfirmation` · `ConnectionBanner` |
-| 内容块 | `TerminalBlock` · `DiffBlock` · `ReadBlock` · `SearchBlock` · `WebBlock` · `JsonTree` · `JsonBlock` |
-| Markdown | `MarkdownText`（GFM + KaTeX + 流式增量解析）· `MessageText` · `CodeBlock`（Shiki）· `extractMarkdownPlainText` |
-| 品牌/图标 | `BrandWordmark` · `FishLogo` · 65+ 个 `Icon*`（ic_ds_* 图标集） |
-| 主题 | `setThemePreference` · `useThemePreference` · `useIsDark` · `resolveDark` |
+| `dsh-ui-kit` | Button、Pill、Input、Menu、Modal、Tooltip、ConnectionIndicator、定位 hooks 等轻量 primitives 与通用工具 |
+| `dsh-ui-kit/blocks` | TerminalBlock、ReadBlock、DiffBlock、SearchBlock、WebBlock、JsonTree |
+| `dsh-ui-kit/markdown` | MarkdownText、MessageText、CodeBlock、JsonBlock、`extractMarkdownPlainText` |
+| `dsh-ui-kit/icons` | 官方图标集、FishLogo、ReferenceIcon |
+| `dsh-ui-kit/theme` | 主题状态、DOM 应用函数和 React hooks |
+| `dsh-ui-kit/theme/bootstrap` | 无 React 依赖的首屏主题脚本 |
+| `dsh-ui-kit/tokens.css` | 五份官方主题 CSS 的有序聚合 |
+| `dsh-ui-kit/katex.css` | 精简为 woff2 的 KaTeX CSS 和字体资产 |
 
-## 设计 Token 体系
+根入口不会再 re-export blocks、Markdown、icons 或 theme。这样只使用基础控件的应用不会触达 KaTeX、Shiki、mdast 或 micromark。
 
-Token 分四层（与 DSH 官方一致，见 `src/styles/`）：
+## 主题
 
-1. **`--dsw-static-*`**：原始色板（amber / blue / deepseek 品牌 / green / neutral / neutral-bluish / red），明暗一致；
-2. **`--dsw-alias-*`**：语义别名（`bg-*`、`border-*`、`label-*`、`button-*`、`interactive-*`、`state-*`、`markdown-*`、`scrollbar-*`、`toast-bg`、`tooltip-bg`…），明暗各一套；
-3. **`--dsw-specific-*`**：产品专属（sidebar、bubble、menu、selector…）；
-4. **基础层**：`--dsw-font-family` / `--ds-font-family-code` / 动效曲线 `--ds-ease-in-out`，另有 `--dsw-shadow-lv1~3`、`--dsw-font-markdown-*` 排版 token、`--shiki-*` 语法高亮调色板、滚动条皮肤 `--dsh-scrollbar-*`。
+主题偏好为 `light | dark | system`，持久化键是 `dsh-ui-kit.theme-preference`。`initializeTheme()` 会恢复合法值，非法或缺失值回退到 `system`；localStorage 不可用时仍会安全应用主题。
 
-明暗切换由 `body[data-ds-dark-theme]` 属性驱动——组件 CSS 全部消费别名 token，
-**无任何字面量颜色**，因此两套主题自动成立。
+```tsx
+import {
+  initializeTheme,
+  setThemePreference,
+  useIsDark,
+  useThemePreference,
+} from 'dsh-ui-kit/theme'
+```
 
-## 给 DSH 第三方插件作者
+主题通过 `document.documentElement.style.colorScheme` 与 `body[data-ds-dark-theme]` 应用。系统颜色变化只注册一个监听器，并仅在 `system` 模式下更新 DOM 与订阅者。
 
-- 插件的 client bundle 直接 `import { Button, ... } from 'dsh-ui-kit'`；样式自动注入，无需处理 CSS。
-- 插件跑在 DSH 宿主内时，宿主已加载同源 token——本库的 `--dsw-*` 变量名与官方一致，
-  界面与官方插件无缝融合；`data-ds-dark-theme` 主题属性也与宿主共享。
-- 示例见 `demo/`（vite）。
+Next.js App Router 可在根布局的 `<body>` 内容前执行无 React bootstrap，避免已保存深色主题首次加载闪烁：
 
-## 构建 / 发布
+```tsx
+import { THEME_BOOTSTRAP_SCRIPT } from 'dsh-ui-kit/theme/bootstrap'
+import 'dsh-ui-kit/tokens.css'
+import 'dsh-ui-kit/katex.css'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html suppressHydrationWarning>
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }} />
+        {children}
+      </body>
+    </html>
+  )
+}
+```
+
+## 组件 API
+
+alpha.3 新增了 `ConnectionIndicator`、`ReferenceIcon`、`useAnchoredPosition`、`useDismissOnOutsidePointer`、增量 Markdown/viewport highlighting、`relativeTime` 与 user-text projection。Terminal、Read、Diff、Search、Web、JsonTree、Markdown、CodeBlock、JsonBlock 和 HoverCard 的界面文案由调用方通过必填 labels 传入，使库保持 Cordis 与 locale runtime 无关。
+
+完整类型由各子路径的声明文件提供；demo 展示了中文 labels 的实际写法。
+
+## 从 0.1.x 迁移
+
+`0.2.0` 是 breaking release：
+
+1. 将 blocks 导入改为 `dsh-ui-kit/blocks`。
+2. 将 Markdown 导入改为 `dsh-ui-kit/markdown`。
+3. 将图标导入改为 `dsh-ui-kit/icons`。
+4. 将主题 API 导入改为 `dsh-ui-kit/theme`，并在客户端启动时调用 `initializeTheme()` 或使用 bootstrap。
+5. 为 alpha.3 要求的组件补齐 `labels`、`copyLabel`、`copiedLabel` 或 `truncatedLabel`。
+6. 使用数学渲染时在全局样式入口显式导入 `dsh-ui-kit/katex.css`。
+7. 删除对旧 `ConnectionBanner` 的引用，改用 `ConnectionIndicator`。
+
+## 设计 Token
+
+`tokens.css` 按官方级联顺序聚合：`base.css`、`design-platform.css`、`gradient-shadow-text.css`、`scrollbar.css`、`shiki.css`。它包含静态色板、语义 aliases、产品专属 tokens、阴影、字体、Markdown 排版和 Shiki 调色板。明暗切换仍由 `body[data-ds-dark-theme]` 驱动。
+
+## 构建与验证
 
 ```sh
-npm run build        # dist/：自包含 ESM bundle + tokens.css + katex + 类型声明
-npm run demo         # 启动 vite demo（明暗切换 + 全组件展示）
-npm run build:site   # 生成 GitHub Pages 静态站点到 site/
-npm run site:serve   # 本地预览生成的站点（默认 http://localhost:4173）
-npm pack             # 产出可发布的 tarball
-npm publish          # 发布到 npm（publishConfig.access: public）
+npm run typecheck
+npm run test:unit
+npm run build
+npm run test:package
+npm run test:react18
+npm run test:next16
+npm run demo:build
+npm run build:site
 ```
 
-产物结构：
+构建每次先清理包自身的 `dist`，输出多入口 ESM、共享 chunks、独立声明文件、`meta.json` 和 `root-inputs.json`。package-content 测试会执行真实 `npm pack` 并验证全部 exports、声明、CSS 与 KaTeX 字体 URL；消费 fixtures 会安装该 tarball。
 
-```
-dist/
-  index.js              # 自包含 ESM bundle（组件 + 自动样式注入 + 内联 KaTeX 字体）
-  types/                # 全套 .d.ts
-  styles/tokens.css     # 设计 token（含明暗两套）
-  katex/                # KaTeX 样式与字体（供 dsh-ui-kit/katex.css 子路径）
-  css/                  # 编译后的 CSS 注入模块
-```
-
-## CI/CD 发布
-
-仓库内置 .github/workflows/release.yml，实现：
-
-1. **基于 git tag 发布**：推送 `vX.Y.Z` 标签触发；Workflow 校验 tag 与 `package.json.version` 一致后执行 typecheck 与 build。
-2. **自动发布 npm**：使用 `npm publish --provenance --access public` 发布，需要仓库 secret `NPM_TOKEN`（npm 的 Automation access token）。
-3. **自动更新 GitHub Pages**：npm 发布成功后运行 `npm run build:site`，生成落地页与文档，并通过 `actions/deploy-pages` 部署到 https://neil-ji.github.io/dsh-ui-kit/。
-
-首次启用前需要在仓库中配置：
-
-- 添加 secret：`Settings → Secrets and variables → Actions → New repository secret`，名称为 `NPM_TOKEN`。
-- 启用 Pages：`Settings → Pages → Source` 选择 **GitHub Actions**。
-- 可先本地执行一次 `npm publish` 创建 npm 包记录，或直接推送首个 tag 由 Workflow 创建。
-- 如需只更新 Pages 不发布 npm：在 Actions 页签手动运行 `Release & Pages`，取消勾选 `publish_to_npm`。
+上游同步版本、commit、路径和本地适配见 [UPSTREAM.md](./UPSTREAM.md)。
 
 ## License
 
-MIT。本项目是 DeepSeek Harness Web UI 组件与设计 token 的独立再封装（设计来源：
-`@deepseek-ai/dsh-client-ui-primitives`、`@deepseek-ai/dsh-client-ui-theme`，均 MIT 许可）。
-版权与归属声明见 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。
+MIT。版权与第三方归属见 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。

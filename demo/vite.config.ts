@@ -9,8 +9,12 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: [
-      { find: /^dsh-ui-kit\/tokens\.css$/, replacement: path.resolve(__dirname, '..', 'dist/styles/tokens.css') },
-      { find: /^dsh-ui-kit\/katex\.css$/, replacement: path.resolve(__dirname, '..', 'dist/katex/katex.min.css') },
+      { find: /^dsh-ui-kit\/tokens\.css$/, replacement: path.resolve(__dirname, '..', 'dist/tokens.css') },
+      { find: /^dsh-ui-kit\/katex\.css$/, replacement: path.resolve(__dirname, '..', 'dist/katex.css') },
+      { find: /^dsh-ui-kit\/blocks$/, replacement: path.resolve(__dirname, '..', 'dist/blocks.js') },
+      { find: /^dsh-ui-kit\/markdown$/, replacement: path.resolve(__dirname, '..', 'dist/markdown.js') },
+      { find: /^dsh-ui-kit\/icons$/, replacement: path.resolve(__dirname, '..', 'dist/icons.js') },
+      { find: /^dsh-ui-kit\/theme$/, replacement: path.resolve(__dirname, '..', 'dist/theme.js') },
       { find: /^dsh-ui-kit$/, replacement: path.resolve(__dirname, '..', 'dist/index.js') },
     ],
   },

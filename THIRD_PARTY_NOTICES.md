@@ -7,6 +7,9 @@ notices are reproduced below.
 
 ## Design source
 
+Synchronized from tag `dsh-v0.1.2-alpha.3`, commit
+`dd6322d604e00eec1ba5e0c8541159906a21094a`.
+
 - **@deepseek-ai/dsh-client-ui-primitives** — "Pure React atoms for the dsh web UI:
   controls, icons, markdown, and JSON inspectors (zero cordis)".
   Source: https://github.com/deepseek-ai/deepseek-harness (packages/client/ui-primitives)
@@ -22,9 +25,10 @@ Full text: https://github.com/deepseek-ai/deepseek-harness/blob/master/LICENSE
 - `src/styles/*.css` — verbatim copies of the ui-theme token sheets
   (design-platform.css, base.css, gradient-shadow-text.css, scrollbar.css, shiki.css).
 - `src/**/*.module.css` — verbatim copies of the ui-primitives component styles.
-- `src/**/*.tsx|ts` — source copies of the ui-primitives components, adapted only
-  where the original wired into the DeepSeek Harness runtime (the `invariant`
-  registration module was removed; nothing else was changed).
+- `src/**/*.tsx|ts` — source copies of the ui-primitives components. The Cordis
+  `invariant` registration module is excluded; packaging, theme persistence,
+  explicit KaTeX assets, and SSR-safe KaTeX rendering are local adaptations
+  documented in `UPSTREAM.md`.
 
 ## Dependencies
 

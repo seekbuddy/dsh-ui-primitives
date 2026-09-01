@@ -51,11 +51,29 @@ jobs:
             exit 1
           fi
 
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm run test:unit
+
       - name: Build package
         run: npm run build
 
-      - name: Typecheck
-        run: npm run typecheck
+      - name: Verify packed contents
+        run: npm run test:package
+
+      - name: Verify React 18 consumer
+        run: npm run test:react18
+
+      - name: Verify Next 16 / React 19 consumer
+        run: npm run test:next16
+
+      - name: Build demo
+        run: npm run demo:build
+
+      - name: Build Pages site
+        run: npm run build:site
 
   publish:
     name: Publish npm package

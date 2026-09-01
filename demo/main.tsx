@@ -1,20 +1,96 @@
 import { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import 'dsh-ui-kit/tokens.css'
+import 'dsh-ui-kit/katex.css'
 import {
   Button, Pill, Input, Menu, Tooltip, HoverCard, Toast, Modal,
-  StateDot, DisclosureRow, JsonTree, TerminalBlock, DiffBlock, ReadBlock,
-  SearchBlock, WebBlock, CodeBlock, JsonBlock, MarkdownText, MessageText,
-  BrandWordmark, FishLogo,
-  setThemePreference, useIsDark,
+  StateDot, DisclosureRow, BrandWordmark,
+} from 'dsh-ui-kit'
+import {
+  JsonTree, TerminalBlock, DiffBlock, ReadBlock, SearchBlock, WebBlock,
+} from 'dsh-ui-kit/blocks'
+import type {
+  JsonTreeLabels, TerminalBlockLabels, DiffBlockLabels, ReadBlockLabels,
+  SearchBlockLabels, WebBlockLabels,
+} from 'dsh-ui-kit/blocks'
+import { CodeBlock, JsonBlock, MarkdownText, MessageText } from 'dsh-ui-kit/markdown'
+import type { MarkdownLabels } from 'dsh-ui-kit/markdown'
+import { FishLogo,
   IconNewChatOutline16, IconSearchOutline16, IconSettingsOutline16, IconGlobeOutline14,
   IconPlusOutline16, IconCheckOutline16, IconCopyOutline16, IconRefreshOutline16,
   IconEditOutline16, IconTrashOutline16, IconWarningOutline16, IconSendOutline16,
   IconFolderOpenOutline16, IconCodeOutline16, IconDataOutline16, IconSparkle16,
   IconThinkOutline16, IconLightOutline16, IconDarkOutline16, IconFollowsystemOutline16,
   IconGoalOutline16, IconSkillOutline16, IconArchiveOutline20, IconChevronDownOutline14,
-} from 'dsh-ui-kit'
+} from 'dsh-ui-kit/icons'
+import { initializeTheme, setThemePreference, useIsDark } from 'dsh-ui-kit/theme'
 import './demo.css'
+
+initializeTheme()
+
+const markdownLabels = {
+  code: { copyLabel: '复制', copiedLabel: '已复制' },
+  footnotes: '脚注',
+} satisfies MarkdownLabels
+
+const foldLabels = {
+  copy: '复制',
+  copied: '已复制',
+  collapseAria: '收起内容',
+  expandAria: (hidden: number) => `展开 ${hidden} 行`,
+  collapse: '收起',
+  expand: (hidden: number) => `展开 ${hidden} 行`,
+}
+
+const terminalLabels = {
+  ...foldLabels,
+  signal: (signal: string) => `信号 ${signal}`,
+  exitCode: (exitCode: number) => `退出码 ${exitCode}`,
+  running: '运行中',
+  failed: '失败',
+  done: '完成',
+  noOutput: '无输出',
+} satisfies TerminalBlockLabels
+
+const readLabels = {
+  ...foldLabels,
+  window: (shown: number, total: number) => `显示 ${shown} / 共 ${total} 行`,
+} satisfies ReadBlockLabels
+
+const diffLabels = {
+  ...foldLabels,
+  files: (count: number) => `${count} 个文件`,
+} satisfies DiffBlockLabels
+
+const searchLabels = {
+  ...foldLabels,
+  pathsSummary: (shown: number, total: number, truncated: boolean) =>
+    `${truncated ? `显示 ${shown} / ` : ''}共 ${total} 个路径`,
+  matchesSummary: (shown: number, total: number, files: number, truncated: boolean) =>
+    `${truncated ? `显示 ${shown} / ` : ''}共 ${total} 处匹配，${files} 个文件`,
+  noResults: '无结果',
+} satisfies SearchBlockLabels
+
+const webLabels = {
+  noResults: '无结果',
+  sourcesTruncated: '来源已截断',
+  http: 'HTTP',
+  contentTruncated: '内容已截断',
+  markdown: markdownLabels,
+} satisfies WebBlockLabels
+
+const jsonTreeLabels = {
+  copyValue: '复制值',
+  copyJson: '复制 JSON',
+  copyPath: '复制路径',
+  copyPrettyJson: '复制格式化 JSON',
+  copyCompactJson: '复制紧凑 JSON',
+  copied: '已复制',
+  copyFailed: '复制失败',
+  collapseNode: '收起节点',
+  expandNode: '展开节点',
+  copyButtonTitle: (action: string) => action,
+} satisfies JsonTreeLabels
 
 const markdownSample = [
   '# 你好，DSH',
@@ -125,6 +201,8 @@ function App() {
             anchor={<Button variant="ghost">悬停看卡片</Button>}
             content={<div style={{ padding: 8 }}>HoverCard 内容，可选中复制。这里展示的是 portaled 预览卡片。</div>}
             copyText="dsh-ui-kit 示例文本"
+            copyLabel="复制"
+            copiedLabel="已复制"
           />
           <Button variant="ghost" onClick={() => setToast({ text: '已复制到剪贴板', seq: Date.now() })}>显示 Toast</Button>
           <Button variant="primary" onClick={() => setModalOpen(true)}>打开 Modal</Button>
@@ -150,26 +228,30 @@ function App() {
       <section>
         <h2>JSON 树 JsonTree</h2>
         <JsonTree
-          data={{ name: 'dsh-ui-kit', version: '0.1.0', license: 'MIT', tags: ['react', 'tokens'], deps: { react: '^18', shiki: '^4' }, optional: null, ok: true }}
+          label="JSON 数据"
+          data={{ name: 'dsh-ui-kit', version: '0.2.0', license: 'MIT', tags: ['react', 'tokens'], deps: { react: '^18 || ^19', shiki: '^4' }, optional: null, ok: true }}
+          labels={jsonTreeLabels}
         />
       </section>
 
       <section>
         <h2>终端 TerminalBlock</h2>
-        <TerminalBlock command="pnpm test -- --runInBand" cwd="~/AIGC/dsh-ui-kit" output="✓ 42 tests passed (1.2s)\n\x1b[32m  all good\x1b[0m" exitCode={0} />
-        <TerminalBlock command="npm run lint" cwd="/tmp/broken" output="Error: ENOENT: no such file or directory" exitCode={2} />
-        <TerminalBlock command="pnpm dev" cwd="~" running />
+        <TerminalBlock labels={terminalLabels} command="pnpm test -- --runInBand" cwd="~/AIGC/dsh-ui-kit" output="✓ 42 tests passed (1.2s)\n\x1b[32m  all good\x1b[0m" exitCode={0} />
+        <TerminalBlock labels={terminalLabels} command="npm run lint" cwd="/tmp/broken" output="Error: ENOENT: no such file or directory" exitCode={2} />
+        <TerminalBlock labels={terminalLabels} command="pnpm dev" cwd="~" running />
       </section>
 
       <section>
         <h2>读写 DiffBlock / ReadBlock / SearchBlock / WebBlock</h2>
         <DiffBlock
+          labels={diffLabels}
           diffs={[
             { path: 'src/theme.ts', oldText: 'export const DEFAULT_PREFERENCE = "system"', newText: 'export const DEFAULT_PREFERENCE: ThemePreference = "system"' },
             { path: 'README.md', oldText: null, newText: '# dsh-ui-kit' },
           ]}
         />
         <ReadBlock
+          labels={readLabels}
           label="src/index.ts"
           lines={[
             { number: 1, text: "export { StateDot } from './StateDot'" },
@@ -179,6 +261,7 @@ function App() {
           totalLines={120}
         />
         <SearchBlock
+          labels={searchLabels}
           kind="matches"
           truncated
           total={42}
@@ -188,6 +271,7 @@ function App() {
           ]}
         />
         <WebBlock
+          labels={webLabels}
           kind="search"
           answer="DeepSeek Harness 是基于 Cordis 的插件化 Agent 运行时。"
           truncated={false}
@@ -196,18 +280,18 @@ function App() {
             { url: 'https://deepseek.com/harness', title: 'DeepSeek Harness', snippet: '官方站点', publishedAt: '2026-08' },
           ]}
         />
-        <WebBlock kind="fetch" url="https://deepseek.com/harness" statusCode={200} truncated={false} />
+        <WebBlock labels={webLabels} kind="fetch" url="https://deepseek.com/harness" statusCode={200} truncated={false} />
       </section>
 
       <section>
         <h2>代码块 CodeBlock / JsonBlock</h2>
-        <CodeBlock code={'const x: number = 42\nexport default x'} lang="ts" />
-        <JsonBlock label="response" payload={{ ok: true, data: { id: 1, items: [1, 2, 3] } }} defaultOpen />
+        <CodeBlock code={'const x: number = 42\nexport default x'} lang="ts" copyLabel="复制" copiedLabel="已复制" />
+        <JsonBlock label="response" payload={{ ok: true, data: { id: 1, items: [1, 2, 3] } }} truncatedLabel={(total) => `已截断，共 ${total} 字符`} defaultOpen />
       </section>
 
       <section>
         <h2>Markdown</h2>
-        <MarkdownText text={markdownSample} />
+        <MarkdownText text={markdownSample} labels={markdownLabels} />
         <h3>MessageText（字面文本）</h3>
         <MessageText text="这是 **不会** 被渲染成 Markdown 的字面文本。" />
       </section>
