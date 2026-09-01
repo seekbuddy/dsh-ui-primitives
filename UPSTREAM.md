@@ -15,3 +15,4 @@ Local packaging adaptations:
 - KaTeX CSS is not imported by Markdown; the package publishes explicit woff2-only CSS and font assets.
 - Theme persistence and bootstrap are standalone and do not use DSH settings or Cordis services.
 - KaTeX's trusted generated markup uses an SSR-safe React wrapper instead of the upstream browser-only `DOMParser` conversion.
+- `HoverCard` fixes the alpha.3 dark-surface foreground omission by explicitly using white text in both themes.
