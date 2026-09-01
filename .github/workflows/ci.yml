@@ -50,3 +50,6 @@ jobs:
 
       - name: Build Pages site
         run: npm run build:site
+
+      - name: Assemble Pages preview
+        run: node scripts/assemble-pages.mjs

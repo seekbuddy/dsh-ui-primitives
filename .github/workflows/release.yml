@@ -1,4 +1,4 @@
-name: Release & Pages
+name: Release
 
 on:
   push:
@@ -7,18 +7,17 @@ on:
   workflow_dispatch:
     inputs:
       publish_to_npm:
-        description: '发布到 npm（取消勾选则仅更新 GitHub Pages）'
+        description: '发布到 npm（取消勾选则仅执行发布验证）'
         type: boolean
         required: true
         default: true
 
 permissions:
   contents: read
-  pages: write
   id-token: write
 
 concurrency:
-  group: release-pages-${{ github.ref }}
+  group: release-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -99,40 +98,3 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --provenance --access public
-
-  pages:
-    name: Deploy GitHub Pages
-    needs: [validate, publish]
-    if: ${{ always() && needs.validate.result == 'success' && needs.publish.result != 'failure' }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build static site
-        run: npm run build:site
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4

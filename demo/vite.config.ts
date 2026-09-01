@@ -6,6 +6,7 @@ import path from 'node:path'
 // like a third-party consumer would (aliases stand in for the npm package).
 export default defineConfig({
   root: path.resolve(__dirname, '..', 'demo'),
+  base: './',
   plugins: [react()],
   resolve: {
     alias: [

@@ -81,6 +81,7 @@
     "demo": "vite demo",
     "demo:build": "vite build demo",
     "build:site": "node scripts/build-site.mjs",
+    "build:pages": "npm run build && npm run demo:build && npm run build:site && node scripts/assemble-pages.mjs",
     "site:serve": "node scripts/serve-site.mjs",
     "prepack": "npm run build"
   },

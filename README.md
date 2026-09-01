@@ -1,6 +1,6 @@
 # dsh-ui-primitives
 
-> [落地页](https://resetsix.github.io/dsh-ui-primitives/) · [官方文档](https://resetsix.github.io/dsh-ui-primitives/docs/) · [npm](https://www.npmjs.com/package/dsh-ui-primitives) · [GitHub](https://github.com/resetsix/dsh-ui-primitives)
+> [落地页](https://resetsix.github.io/dsh-ui-primitives/) · [组件 Demo](https://resetsix.github.io/dsh-ui-primitives/demo/) · [官方文档](https://resetsix.github.io/dsh-ui-primitives/docs/) · [npm](https://www.npmjs.com/package/dsh-ui-primitives) · [GitHub](https://github.com/resetsix/dsh-ui-primitives)
 
 独立发布的 React 组件库，同步 DeepSeek Harness Web UI primitives 与五份 `--dsw-*` 主题样式，不依赖 Cordis。`0.2.0` 对齐官方 `dsh-v0.1.2-alpha.3`，支持 React 18 和 React 19。
 
@@ -127,6 +127,7 @@ npm run test:react18
 npm run test:next16
 npm run demo:build
 npm run build:site
+npm run build:pages
 ```
 
 构建每次先清理包自身的 `dist`，输出多入口 ESM、共享 chunks、独立声明文件、`meta.json` 和 `root-inputs.json`。package-content 测试会执行真实 `npm pack` 并验证全部 exports、声明、CSS 与 KaTeX 字体 URL；消费 fixtures 会安装该 tarball。
