@@ -1,6 +1,6 @@
 # dsh-ui-primitives
 
-> [落地页](https://resetsix.github.io/dsh-ui-primitives/) · [组件 Demo](https://resetsix.github.io/dsh-ui-primitives/demo/) · [官方文档](https://resetsix.github.io/dsh-ui-primitives/docs/) · [npm](https://www.npmjs.com/package/dsh-ui-primitives) · [GitHub](https://github.com/resetsix/dsh-ui-primitives)
+> [落地页](https://seekbuddy.github.io/dsh-ui-primitives/) · [组件 Demo](https://seekbuddy.github.io/dsh-ui-primitives/demo/) · [官方文档](https://seekbuddy.github.io/dsh-ui-primitives/docs/) · [npm](https://www.npmjs.com/package/dsh-ui-primitives) · [GitHub](https://github.com/seekbuddy/dsh-ui-primitives)
 
 独立发布的 React 组件库，同步 DeepSeek Harness Web UI primitives 与五份 `--dsw-*` 主题样式，不依赖 Cordis。`0.2.0` 对齐官方 `dsh-v0.1.2-alpha.3`，支持 React 18 和 React 19。
 

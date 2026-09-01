@@ -64,10 +64,10 @@
     "access": "public"
   },
   "license": "MIT",
-  "homepage": "https://resetsix.github.io/dsh-ui-primitives/",
+  "homepage": "https://seekbuddy.github.io/dsh-ui-primitives/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/resetsix/dsh-ui-primitives.git"
+    "url": "git+https://github.com/seekbuddy/dsh-ui-primitives.git"
   },
   "scripts": {
     "build": "node build/build.mjs",
