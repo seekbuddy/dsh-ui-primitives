@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 const root = path.resolve(import.meta.dirname, '..')
-const temporary = mkdtempSync(path.join(tmpdir(), 'dsh-ui-kit-pack-'))
+const temporary = mkdtempSync(path.join(tmpdir(), 'dsh-ui-primitives-pack-'))
 
 function exportedPaths(value) {
   if (typeof value === 'string') return value.startsWith('./') ? [value.slice(2)] : []

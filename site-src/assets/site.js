@@ -4,7 +4,7 @@
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     try {
-      localStorage.setItem('dsh-ui-kit-theme', theme);
+      localStorage.setItem('dsh-ui-primitives-theme', theme);
     } catch (err) {
       // Ignore storage failures (private mode etc).
     }
@@ -16,7 +16,7 @@
 
   function initialTheme() {
     try {
-      var saved = localStorage.getItem('dsh-ui-kit-theme');
+      var saved = localStorage.getItem('dsh-ui-primitives-theme');
       if (saved === 'light' || saved === 'dark') return saved;
     } catch (err) {
       // Ignore.

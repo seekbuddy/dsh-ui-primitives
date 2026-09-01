@@ -1,5 +1,5 @@
-import { Button, ConnectionIndicator } from 'dsh-ui-kit'
-import type { ThemePreference } from 'dsh-ui-kit/theme'
+import { Button, ConnectionIndicator } from 'dsh-ui-primitives'
+import type { ThemePreference } from 'dsh-ui-primitives/theme'
 
 const preference: ThemePreference = 'system'
 

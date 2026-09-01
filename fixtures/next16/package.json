@@ -5,7 +5,7 @@
     "check": "next build"
   },
   "dependencies": {
-    "dsh-ui-kit": "file:__PACKED_BY_TEST__",
+    "dsh-ui-primitives": "file:__PACKED_BY_TEST__",
     "next": "16.2.0",
     "react": "19.2.0",
     "react-dom": "19.2.0"

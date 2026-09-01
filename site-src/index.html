@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>dsh-ui-kit · DeepSeek Harness 风格 React 组件库</title>
-    <meta name="description" content="dsh-ui-kit 是忠实复刻 DeepSeek Harness Web UI 设计系统的独立 React 组件库，tokens、明暗主题、组件样式与官方严格一致。" />
+    <title>dsh-ui-primitives · DeepSeek Harness 风格 React 组件库</title>
+    <meta name="description" content="dsh-ui-primitives 是忠实复刻 DeepSeek Harness Web UI 设计系统的独立 React 组件库，tokens、明暗主题、组件样式与官方严格一致。" />
     <link rel="stylesheet" href="./assets/site.css" />
     <script>
       (function () {
         try {
-          var saved = localStorage.getItem('dsh-ui-kit-theme');
+          var saved = localStorage.getItem('dsh-ui-primitives-theme');
           var theme = saved === 'light' || saved === 'dark'
             ? saved
             : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -23,7 +23,7 @@
       <div class="container header-inner">
         <a class="brand" href="./">
           <span class="brand-mark">✦</span>
-          <span>dsh-ui-kit</span>
+          <span>dsh-ui-primitives</span>
         </a>
         <nav class="nav">
           <a class="active" href="./">落地页</a>
@@ -41,7 +41,7 @@
           <p class="eyebrow">React 18 / 19 · MIT · 零 Cordis 依赖 · v{{version}}</p>
           <h1>为 DeepSeek Harness 插件打造的 <span class="grad">UI 组件库</span></h1>
           <p class="lede">
-            dsh-ui-kit 忠实复刻 DeepSeek Harness Web UI 的设计系统与 UI 原子组件。
+            dsh-ui-primitives 忠实复刻 DeepSeek Harness Web UI 的设计系统与 UI 原子组件。
             <code style="font-family: var(--mono)">--dsw-*</code> tokens、明暗主题、组件样式与官方
             <code style="font-family: var(--mono)">@deepseek-ai/dsh-client-ui-primitives</code> /
             <code style="font-family: var(--mono)">dsh-client-ui-theme</code> 严格一致，让第三方插件与宿主界面无缝融合。
@@ -51,7 +51,7 @@
             <a class="btn ghost" href="{{repoUrl}}" target="_blank" rel="noreferrer">在 GitHub 上查看</a>
           </div>
           <div class="install">
-            <code id="install-command">npm i dsh-ui-kit</code>
+            <code id="install-command">npm i dsh-ui-primitives</code>
             <button class="copy-btn" type="button">复制</button>
           </div>
           <div class="badges">
@@ -66,7 +66,7 @@
 
       <section class="section">
         <div class="container">
-          <h2 class="section-head">为什么选择 dsh-ui-kit？</h2>
+          <h2 class="section-head">为什么选择 dsh-ui-primitives？</h2>
           <div class="grid">
             <div class="card">
               <div class="card-icon">🎨</div>
@@ -106,11 +106,11 @@
         <div class="container">
           <h2 class="section-head">快速开始</h2>
           <p class="section-sub">按职责从独立入口导入；tokens.css 与 katex.css 由应用全局加载一次。</p>
-          <pre class="code-block"><code class="language-tsx">import { Button, Pill } from 'dsh-ui-kit'
-import { MarkdownText } from 'dsh-ui-kit/markdown'
-import { setThemePreference } from 'dsh-ui-kit/theme'
-import 'dsh-ui-kit/tokens.css'
-import 'dsh-ui-kit/katex.css'
+          <pre class="code-block"><code class="language-tsx">import { Button, Pill } from 'dsh-ui-primitives'
+import { MarkdownText } from 'dsh-ui-primitives/markdown'
+import { setThemePreference } from 'dsh-ui-primitives/theme'
+import 'dsh-ui-primitives/tokens.css'
+import 'dsh-ui-primitives/katex.css'
 
 const labels = { code: { copyLabel: '复制', copiedLabel: '已复制' }, footnotes: '脚注' }
 
@@ -147,7 +147,7 @@ export function MyPluginUI() {
             <div class="card">
               <div class="card-icon">⚡</div>
               <h3>开箱即用</h3>
-              <p>组件样式自动注入；数学渲染显式导入 <code>dsh-ui-kit/katex.css</code>，字体 URL 可由框架正常处理。</p>
+              <p>组件样式自动注入；数学渲染显式导入 <code>dsh-ui-primitives/katex.css</code>，字体 URL 可由框架正常处理。</p>
             </div>
           </div>
         </div>

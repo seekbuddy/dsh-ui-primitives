@@ -1,6 +1,6 @@
 import { createElement } from 'react'
 import { renderToString } from 'react-dom/server'
-import { Button } from 'dsh-ui-kit'
+import { Button } from 'dsh-ui-primitives'
 
 const html = renderToString(createElement(Button, { variant: 'primary' }, 'React 18'))
 if (!html.includes('React 18')) throw new Error('server render did not produce Button content')

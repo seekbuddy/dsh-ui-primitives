@@ -1,10 +1,10 @@
 'use client'
 
-import { Button } from 'dsh-ui-kit'
-import { TerminalBlock } from 'dsh-ui-kit/blocks'
-import { MarkdownText } from 'dsh-ui-kit/markdown'
-import { IconCheckOutline16 } from 'dsh-ui-kit/icons'
-import { setThemePreference, useIsDark } from 'dsh-ui-kit/theme'
+import { Button } from 'dsh-ui-primitives'
+import { TerminalBlock } from 'dsh-ui-primitives/blocks'
+import { MarkdownText } from 'dsh-ui-primitives/markdown'
+import { IconCheckOutline16 } from 'dsh-ui-primitives/icons'
+import { setThemePreference, useIsDark } from 'dsh-ui-primitives/theme'
 
 const markdownLabels = {
   code: { copyLabel: 'Copy', copiedLabel: 'Copied' },

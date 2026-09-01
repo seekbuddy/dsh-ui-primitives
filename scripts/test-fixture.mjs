@@ -7,7 +7,7 @@ import path from 'node:path'
 const fixtureName = process.argv[2]
 assert.ok(fixtureName === 'react18' || fixtureName === 'next16', 'fixture must be react18 or next16')
 const root = path.resolve(import.meta.dirname, '..')
-const temporary = mkdtempSync(path.join(tmpdir(), `dsh-ui-kit-${fixtureName}-`))
+const temporary = mkdtempSync(path.join(tmpdir(), `dsh-ui-primitives-${fixtureName}-`))
 const app = path.join(temporary, 'app')
 
 function walk(directory) {
@@ -25,7 +25,7 @@ try {
   cpSync(path.join(root, 'fixtures', fixtureName), app, { recursive: true })
   const packagePath = path.join(app, 'package.json')
   const manifest = JSON.parse(readFileSync(packagePath, 'utf8'))
-  manifest.dependencies['dsh-ui-kit'] = `file:${archive}`
+  manifest.dependencies['dsh-ui-primitives'] = `file:${archive}`
   writeFileSync(packagePath, `${JSON.stringify(manifest, null, 2)}\n`)
   execFileSync('npm', ['install', '--ignore-scripts', '--no-audit', '--no-fund'], {
     cwd: app,

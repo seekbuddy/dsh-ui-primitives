@@ -2,7 +2,7 @@ export const THEME_PREFERENCES = ['light', 'dark', 'system'] as const
 export type ThemePreference = (typeof THEME_PREFERENCES)[number]
 
 export const DEFAULT_PREFERENCE: ThemePreference = 'system'
-export const THEME_STORAGE_KEY = 'dsh-ui-kit.theme-preference'
+export const THEME_STORAGE_KEY = 'dsh-ui-primitives.theme-preference'
 
 type ThemeListener = () => void
 

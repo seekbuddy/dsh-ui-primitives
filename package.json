@@ -1,5 +1,5 @@
 {
-  "name": "dsh-ui-kit",
+  "name": "dsh-ui-primitives",
   "version": "0.2.0",
   "description": "Independent React component kit matching the DeepSeek Harness web UI design system (--dsw-* tokens, light/dark themes). Design source: @deepseek-ai/dsh-client-ui-primitives + dsh-client-ui-theme (MIT).",
   "keywords": [
@@ -64,10 +64,10 @@
     "access": "public"
   },
   "license": "MIT",
-  "homepage": "https://neil-ji.github.io/dsh-ui-kit/",
+  "homepage": "https://resetsix.github.io/dsh-ui-primitives/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/neil-ji/dsh-ui-kit.git"
+    "url": "git+https://github.com/resetsix/dsh-ui-primitives.git"
   },
   "scripts": {
     "build": "node build/build.mjs",

@@ -42,12 +42,12 @@ function emitCssModule(relativePath) {
   })
   const classMap = {}
   for (const [local, value] of Object.entries(cssExports ?? {})) classMap[local] = value.name
-  const id = `dsh-ui-kit/${relativePath}`
+  const id = `dsh-ui-primitives/${relativePath}`
   const moduleText = [
     `const id=${JSON.stringify(id)};`,
-    `if(typeof document!=="undefined"&&!document.querySelector('style[data-dsh-ui-kit="'+id+'"]')){`,
+    `if(typeof document!=="undefined"&&!document.querySelector('style[data-dsh-ui-primitives="'+id+'"]')){`,
     'const element=document.createElement("style");',
-    'element.setAttribute("data-dsh-ui-kit",id);',
+    'element.setAttribute("data-dsh-ui-primitives",id);',
     `element.textContent=${JSON.stringify(code.toString())};`,
     'document.head.appendChild(element);',
     '}',
@@ -144,7 +144,7 @@ try {
       'micromark', 'micromark-*',
     ],
     plugins: [{
-      name: 'dsh-ui-kit-css-modules',
+      name: 'dsh-ui-primitives-css-modules',
       setup(esbuild) {
         esbuild.onResolve({ filter: /\.module\.css$/ }, (args) => {
           const absolute = path.resolve(args.resolveDir, args.path)

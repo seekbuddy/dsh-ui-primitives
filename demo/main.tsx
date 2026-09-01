@@ -1,20 +1,20 @@
 import { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import 'dsh-ui-kit/tokens.css'
-import 'dsh-ui-kit/katex.css'
+import 'dsh-ui-primitives/tokens.css'
+import 'dsh-ui-primitives/katex.css'
 import {
   Button, Pill, Input, Menu, Tooltip, HoverCard, Toast, Modal,
   StateDot, DisclosureRow, BrandWordmark,
-} from 'dsh-ui-kit'
+} from 'dsh-ui-primitives'
 import {
   JsonTree, TerminalBlock, DiffBlock, ReadBlock, SearchBlock, WebBlock,
-} from 'dsh-ui-kit/blocks'
+} from 'dsh-ui-primitives/blocks'
 import type {
   JsonTreeLabels, TerminalBlockLabels, DiffBlockLabels, ReadBlockLabels,
   SearchBlockLabels, WebBlockLabels,
-} from 'dsh-ui-kit/blocks'
-import { CodeBlock, JsonBlock, MarkdownText, MessageText } from 'dsh-ui-kit/markdown'
-import type { MarkdownLabels } from 'dsh-ui-kit/markdown'
+} from 'dsh-ui-primitives/blocks'
+import { CodeBlock, JsonBlock, MarkdownText, MessageText } from 'dsh-ui-primitives/markdown'
+import type { MarkdownLabels } from 'dsh-ui-primitives/markdown'
 import { FishLogo,
   IconNewChatOutline16, IconSearchOutline16, IconSettingsOutline16, IconGlobeOutline14,
   IconPlusOutline16, IconCheckOutline16, IconCopyOutline16, IconRefreshOutline16,
@@ -22,8 +22,8 @@ import { FishLogo,
   IconFolderOpenOutline16, IconCodeOutline16, IconDataOutline16, IconSparkle16,
   IconThinkOutline16, IconLightOutline16, IconDarkOutline16, IconFollowsystemOutline16,
   IconGoalOutline16, IconSkillOutline16, IconArchiveOutline20, IconChevronDownOutline14,
-} from 'dsh-ui-kit/icons'
-import { initializeTheme, setThemePreference, useIsDark } from 'dsh-ui-kit/theme'
+} from 'dsh-ui-primitives/icons'
+import { initializeTheme, setThemePreference, useIsDark } from 'dsh-ui-primitives/theme'
 import './demo.css'
 
 initializeTheme()
@@ -99,7 +99,7 @@ const markdownSample = [
   '',
   '\`\`\`ts',
   'const greeting = (name: string) => \`你好, \${name}!\`',
-  "console.log(greeting('dsh-ui-kit'))",
+  "console.log(greeting('dsh-ui-primitives'))",
   '\`\`\`',
   '',
   '> 引用块：一切皆插件。',
@@ -200,7 +200,7 @@ function App() {
           <HoverCard
             anchor={<Button variant="ghost">悬停看卡片</Button>}
             content={<div style={{ padding: 8 }}>HoverCard 内容，可选中复制。这里展示的是 portaled 预览卡片。</div>}
-            copyText="dsh-ui-kit 示例文本"
+            copyText="dsh-ui-primitives 示例文本"
             copyLabel="复制"
             copiedLabel="已复制"
           />
@@ -229,14 +229,14 @@ function App() {
         <h2>JSON 树 JsonTree</h2>
         <JsonTree
           label="JSON 数据"
-          data={{ name: 'dsh-ui-kit', version: '0.2.0', license: 'MIT', tags: ['react', 'tokens'], deps: { react: '^18 || ^19', shiki: '^4' }, optional: null, ok: true }}
+          data={{ name: 'dsh-ui-primitives', version: '0.2.0', license: 'MIT', tags: ['react', 'tokens'], deps: { react: '^18 || ^19', shiki: '^4' }, optional: null, ok: true }}
           labels={jsonTreeLabels}
         />
       </section>
 
       <section>
         <h2>终端 TerminalBlock</h2>
-        <TerminalBlock labels={terminalLabels} command="pnpm test -- --runInBand" cwd="~/AIGC/dsh-ui-kit" output="✓ 42 tests passed (1.2s)\n\x1b[32m  all good\x1b[0m" exitCode={0} />
+        <TerminalBlock labels={terminalLabels} command="pnpm test -- --runInBand" cwd="~/AIGC/dsh-ui-primitives" output="✓ 42 tests passed (1.2s)\n\x1b[32m  all good\x1b[0m" exitCode={0} />
         <TerminalBlock labels={terminalLabels} command="npm run lint" cwd="/tmp/broken" output="Error: ENOENT: no such file or directory" exitCode={2} />
         <TerminalBlock labels={terminalLabels} command="pnpm dev" cwd="~" running />
       </section>
@@ -247,7 +247,7 @@ function App() {
           labels={diffLabels}
           diffs={[
             { path: 'src/theme.ts', oldText: 'export const DEFAULT_PREFERENCE = "system"', newText: 'export const DEFAULT_PREFERENCE: ThemePreference = "system"' },
-            { path: 'README.md', oldText: null, newText: '# dsh-ui-kit' },
+            { path: 'README.md', oldText: null, newText: '# dsh-ui-primitives' },
           ]}
         />
         <ReadBlock
@@ -309,7 +309,7 @@ function App() {
         </div>
       </section>
 
-      <footer className="foot">dsh-ui-kit · 与 DeepSeek Harness Web UI 设计系统严格一致（--dsw-* tokens，MIT）</footer>
+      <footer className="foot">dsh-ui-primitives · 与 DeepSeek Harness Web UI 设计系统严格一致（--dsw-* tokens，MIT）</footer>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Build the static GitHub Pages site for dsh-ui-kit.
+ * Build the static GitHub Pages site for dsh-ui-primitives.
  *
  * Outputs to ./site:
  *   index.html            landing page

@@ -5,7 +5,7 @@
     "check": "tsc --noEmit && node server.mjs"
   },
   "dependencies": {
-    "dsh-ui-kit": "file:__PACKED_BY_TEST__",
+    "dsh-ui-primitives": "file:__PACKED_BY_TEST__",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },
