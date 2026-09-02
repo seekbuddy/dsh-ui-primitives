@@ -5,7 +5,7 @@
 - Primitives source: `packages/client/ui-primitives/src`
 - Theme source: `packages/client/ui-theme/src/styles`
 
-The TypeScript, CSS Modules, and six theme sheets are synchronized from those paths. `src/invariant.ts` is intentionally excluded because it only registers DeepSeek Harness invariants through Cordis.
+The TypeScript, CSS Modules, and six theme sheets are synchronized from those paths. No `src/invariant.ts` is copied because alpha.4 no longer publishes a Cordis invariant companion.
 
 Local packaging adaptations:
 
