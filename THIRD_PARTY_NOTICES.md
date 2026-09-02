@@ -7,8 +7,8 @@ notices are reproduced below.
 
 ## Design source
 
-Synchronized from tag `dsh-v0.1.2-alpha.3`, commit
-`dd6322d604e00eec1ba5e0c8541159906a21094a`.
+Synchronized from tag `dsh-v0.1.2-alpha.4`, commit
+`4e84901e6471b79ec0338099867ebb4606d12bb5`.
 
 - **@deepseek-ai/dsh-client-ui-primitives** — "Pure React atoms for the dsh web UI:
   controls, icons, markdown, and JSON inspectors (zero cordis)".

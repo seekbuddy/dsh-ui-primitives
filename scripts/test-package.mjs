@@ -33,6 +33,24 @@ try {
 
   const archive = path.join(temporary, packed[0].filename)
   execFileSync('tar', ['-xzf', archive, '-C', temporary])
+
+  const tokensCss = readFileSync(path.join(temporary, 'package', 'dist', 'tokens.css'), 'utf8')
+  for (const token of [
+    '--dsw-corner-shape',
+    '--dsw-elevation-stroke',
+    '--dsw-elevation-panel',
+    '--dsw-elevation-prominent',
+    '--dsw-elevation-soft',
+  ]) assert.ok(tokensCss.includes(token), `tokens CSS is missing alpha.4 token: ${token}`)
+  assert.ok(
+    tokensCss.indexOf('--dsw-corner-shape') < tokensCss.indexOf('--dsw-static-amber-100'),
+    'corner-shape.css must precede design-platform.css',
+  )
+  assert.ok(
+    tokensCss.indexOf('--dsh-scrollbar-width') < tokensCss.indexOf('--dsw-elevation-stroke-color'),
+    'scrollbar.css must precede gradient-shadow-text.css',
+  )
+
   const css = readFileSync(path.join(temporary, 'package', 'dist', 'katex.css'), 'utf8')
   const urls = [...css.matchAll(/url\(["']?([^"')]+)["']?\)/g)].map(match => match[1])
   assert.ok(urls.length > 0, 'KaTeX CSS has no font URLs')

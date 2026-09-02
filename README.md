@@ -2,7 +2,7 @@
 
 > [落地页](https://seekbuddy.github.io/dsh-ui-primitives/) · [组件 Demo](https://seekbuddy.github.io/dsh-ui-primitives/demo/) · [官方文档](https://seekbuddy.github.io/dsh-ui-primitives/docs/) · [npm](https://www.npmjs.com/package/dsh-ui-primitives) · [GitHub](https://github.com/seekbuddy/dsh-ui-primitives)
 
-独立发布的 React 组件库，同步 DeepSeek Harness Web UI primitives 与五份 `--dsw-*` 主题样式，不依赖 Cordis。`0.2.0` 对齐官方 `dsh-v0.1.2-alpha.3`，支持 React 18 和 React 19。
+独立发布的 React 组件库，同步 DeepSeek Harness Web UI primitives 与六份 `--dsw-*` 主题样式，不依赖 Cordis。`0.2.0` 对齐官方 `dsh-v0.1.2-alpha.4`，支持 React 18 和 React 19。
 
 ## 安装
 
@@ -55,7 +55,7 @@ export function Example() {
 | `dsh-ui-primitives/icons` | 官方图标集、FishLogo、ReferenceIcon |
 | `dsh-ui-primitives/theme` | 主题状态、DOM 应用函数和 React hooks |
 | `dsh-ui-primitives/theme/bootstrap` | 无 React 依赖的首屏主题脚本 |
-| `dsh-ui-primitives/tokens.css` | 五份官方主题 CSS 的有序聚合 |
+| `dsh-ui-primitives/tokens.css` | 六份官方主题 CSS 的有序聚合 |
 | `dsh-ui-primitives/katex.css` | 精简为 woff2 的 KaTeX CSS 和字体资产 |
 
 根入口不会再 re-export blocks、Markdown、icons 或 theme。这样只使用基础控件的应用不会触达 KaTeX、Shiki、mdast 或 micromark。
@@ -114,7 +114,7 @@ alpha.3 新增了 `ConnectionIndicator`、`ReferenceIcon`、`useAnchoredPosition
 
 ## 设计 Token
 
-`tokens.css` 按官方级联顺序聚合：`base.css`、`design-platform.css`、`gradient-shadow-text.css`、`scrollbar.css`、`shiki.css`。它包含静态色板、语义 aliases、产品专属 tokens、阴影、字体、Markdown 排版和 Shiki 调色板。明暗切换仍由 `body[data-ds-dark-theme]` 驱动。
+`tokens.css` 按官方级联顺序聚合：`base.css`、`corner-shape.css`、`design-platform.css`、`scrollbar.css`、`gradient-shadow-text.css`、`shiki.css`。它包含平滑圆角、静态色板、语义 aliases、产品专属 tokens、elevation 阴影、字体、Markdown 排版和 Shiki 调色板。明暗切换仍由 `body[data-ds-dark-theme]` 驱动。
 
 ## 构建与验证
 

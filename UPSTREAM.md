@@ -1,11 +1,11 @@
 # Upstream synchronization
 
-- Tag: `dsh-v0.1.2-alpha.3`
-- Commit: `dd6322d604e00eec1ba5e0c8541159906a21094a`
+- Tag: `dsh-v0.1.2-alpha.4`
+- Commit: `4e84901e6471b79ec0338099867ebb4606d12bb5`
 - Primitives source: `packages/client/ui-primitives/src`
 - Theme source: `packages/client/ui-theme/src/styles`
 
-The TypeScript, CSS Modules, and five theme sheets are synchronized from those paths. `src/invariant.ts` is intentionally excluded because it only registers DeepSeek Harness invariants through Cordis.
+The TypeScript, CSS Modules, and six theme sheets are synchronized from those paths. `src/invariant.ts` is intentionally excluded because it only registers DeepSeek Harness invariants through Cordis.
 
 Local packaging adaptations:
 

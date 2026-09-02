@@ -59,7 +59,7 @@ function emitCssModule(relativePath) {
 }
 
 function emitTokens() {
-  const order = ['base.css', 'design-platform.css', 'gradient-shadow-text.css', 'scrollbar.css', 'shiki.css']
+  const order = ['base.css', 'corner-shape.css', 'design-platform.css', 'scrollbar.css', 'gradient-shadow-text.css', 'shiki.css']
   const css = order.map((file) => readFileSync(path.join(srcDir, 'styles', file), 'utf8')).join('\n')
   writeFileSync(path.join(distDir, 'tokens.css'), css)
   writeFileSync(path.join(distDir, 'tokens.css.d.ts'), 'declare const css: string\nexport default css\n')
